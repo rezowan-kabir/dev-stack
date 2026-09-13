@@ -33,7 +33,7 @@ A modern, interactive web application designed to help developers explore, selec
 
 ## 1. What is JSX, and why is it used in React?
 
-**Answer:**JSX is a JavaScript syntax that lets us write HTML-like code inside JavaScript. It makes React code easier to read and helps us describe what the UI should look like directly inside our components.
+**Answer:** JSX is a JavaScript syntax that lets us write HTML-like code inside JavaScript. It makes React code easier to read and helps us describe what the UI should look like directly inside our components.
 
 
 ## 2. What is the difference between props and state?
