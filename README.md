@@ -43,7 +43,7 @@ A modern, interactive web application designed to help developers explore, selec
 **Answer:** The `useState` hook allows functional components to create, hold, and update their own local state. In this project, `useState` was used in `App.tsx` to store the loaded technology list (`technologies`), maintain the selected items in the user's stack (`stack`), and manage the loading spinner state (`loading`).
 
 ### 4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
-**Answer:** The `useEffect` hook is used to handle side effects in components, such as fetching data, modifying the DOM, or setting up subscriptions. In this project, it was used to fetch the technology items from the local `data.json` file asynchronously as soon as the main application component mounted on the screen.
+**Answer:** The `useEffect` hook is used to handle side effects in components, such as fetching data, modifying the DOM, or setting up subscriptions. In this project, it was used to fetch the technology items from local `data.json` file asynchronously as soon as the main application component mounted on the screen.
 
 ### 5. Why does every item in a `.map()` list need a unique `key` prop?
 **Answer:** React uses the unique `key` prop to identify which items in a list have changed, been added, or been removed. It optimizes performance during the reconciliation process by preventing unnecessary re-renders of unchanged DOM elements.
