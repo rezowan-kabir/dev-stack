@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
-import type { Technology } from "./types";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import TechCard from "./components/TechCard";
-import Sidebar from "./components/Sidebar";
-import Footer from "./components/Footer";
+import { useState, useEffect } from 'react';
+import type { Technology } from './types';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import TechCard from './components/TechCard';
+import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// React Toastify Imports
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
@@ -21,13 +22,22 @@ export default function App() {
         setLoading(true);
         setError(null);
 
-        const response = await fetch("/data.json");
-        if (!response.ok) throw new Error("Failed to load data.");
+        const response = await fetch('/data.json');
+
+        if (!response.ok) {
+          throw new Error('Failed to load technology data.');
+        }
 
         const data: Technology[] = await response.json();
         setTechnologies(data);
-      } catch (err: any) {
-        setError(err.message || "An error occurred.");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error('Fetch error:', err.message);
+          setError(err.message);
+        } else {
+          console.error('An unexpected error occurred:', err);
+          setError('An unexpected error occurred.');
+        }
       } finally {
         setLoading(false);
       }
@@ -36,46 +46,53 @@ export default function App() {
     loadData();
   }, []);
 
+  // Add to Stack with Toast Notifications
   const handleAddToStack = (tech: Technology) => {
     const isAlreadyAdded = stack.some((item) => item.id === tech.id);
 
     if (isAlreadyAdded) {
+      // Warning Toast
       toast.warning(`${tech.name} is already in your stack!`);
       return;
     }
 
-    setStack((prev) => [...prev, tech]);
-    toast.success(`${tech.name} added!`);
+    setStack((previousStack) => [...previousStack, tech]);
+    // Success Toast
+    toast.success(`${tech.name} added to your stack!`);
   };
 
+  // Remove One Technology with Info Toast
   const handleRemoveFromStack = (id: string) => {
     const itemToRemove = stack.find((item) => item.id === id);
-    setStack((prev) => prev.filter((item) => item.id !== id));
+    setStack((previousStack) => previousStack.filter((item) => item.id !== id));
 
     if (itemToRemove) {
-      toast.info(`${itemToRemove.name} removed.`);
+      // Info Toast for Removal
+      toast.info(`${itemToRemove.name} removed from stack.`);
     }
   };
 
+  // Remove All Technologies with Error/Danger Toast
   const handleRemoveAll = () => {
     setStack([]);
-    toast.error("All technologies removed!");
+    // Error Toast for Clear All
+    toast.error('All technologies removed!');
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col">
+    <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1">
         <Hero />
 
-        <section id="technologies" className="max-w-7xl mx-auto px-4 py-12">
+        <section id="technologies" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-slate-900">
-              Explore Technologies
+            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+              Explore the <span className="text-brand-gradient">Technologies</span>
             </h2>
             <p className="text-slate-500 text-sm mt-1">
-              Pick your technologies to build your stack.
+              Pick one technology per category to build your ideal stack.
             </p>
           </div>
 
@@ -84,22 +101,25 @@ export default function App() {
               {loading ? (
                 <div className="py-20 flex flex-col items-center justify-center text-slate-400 gap-3">
                   <div className="w-8 h-8 border-4 border-slate-300 border-t-pink-500 rounded-full animate-spin"></div>
-                  <p className="text-sm">Loading...</p>
+                  <p className="text-sm font-medium">Loading technologies, please wait...</p>
                 </div>
               ) : error ? (
-                <div className="p-4 bg-red-50 text-red-600 rounded-xl text-sm">
+                <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium">
                   Error: {error}
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {technologies.map((item) => (
-                    <TechCard
-                      key={item.id}
-                      tech={item}
-                      handleAddToStack={handleAddToStack}
-                      isAdded={stack.some((s) => s.id === item.id)}
-                    />
-                  ))}
+                  {technologies.map((item) => {
+                    const isAdded = stack.some((stackItem) => stackItem.id === item.id);
+                    return (
+                      <TechCard
+                        key={item.id}
+                        tech={item}
+                        handleAddToStack={handleAddToStack}
+                        isAdded={isAdded}
+                      />
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -117,6 +137,7 @@ export default function App() {
 
       <Footer />
 
+      {/* Render ToastContainer at the bottom of application */}
       <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
   );

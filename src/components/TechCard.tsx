@@ -8,16 +8,15 @@ interface TechCardProps {
 
 export default function TechCard({ tech, handleAddToStack, isAdded }: TechCardProps) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between">
+    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
       <div>
         <div className="flex items-start justify-between gap-2 mb-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 p-2">
-              <img src={tech.icon} alt={tech.name} className="w-full h-full" />
+            <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2">
+              <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
             </div>
-            <h3 className="font-bold text-slate-900">{tech.name}</h3>
+            <h3 className="font-bold text-slate-900 text-base">{tech.name}</h3>
           </div>
-
           {tech.badge && (
             <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
               {tech.badge}
@@ -25,7 +24,7 @@ export default function TechCard({ tech, handleAddToStack, isAdded }: TechCardPr
           )}
         </div>
 
-        <p className="text-slate-500 text-xs mb-4 ">
+        <p className="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-2">
           {tech.description}
         </p>
 
@@ -42,13 +41,14 @@ export default function TechCard({ tech, handleAddToStack, isAdded }: TechCardPr
         </div>
       </div>
 
+      {/* Button state and style conditional handling */}
       <button
         onClick={() => handleAddToStack(tech)}
         disabled={isAdded}
-        className={`w-full py-2.5 px-4 rounded-xl text-xs font-semibold ${
+        className={`w-full py-2.5 px-4 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1 ${
           isAdded
-            ? 'bg-slate-100 text-slate-400 border border-slate-200'
-            : 'brand-gradient text-white'
+            ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200'
+            : 'brand-gradient text-white hover:opacity-95 shadow-sm'
         }`}
       >
         {isAdded ? '✓ Added to Stack' : 'Add to Stack'}
