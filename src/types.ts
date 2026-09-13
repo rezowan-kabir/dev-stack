@@ -8,3 +8,15 @@ export interface Technology {
   difficulty: string;
   badge: string;
 }
+
+export interface TechCardProps {
+  tech: Technology;
+  handleAddToStack: (tech: Technology) => void;
+  isAdded: boolean;
+}
+
+export interface SidebarProps {
+  stack: Technology[];
+  handleRemoveFromStack: (id: string) => void;
+  handleRemoveAll: () => void;
+}

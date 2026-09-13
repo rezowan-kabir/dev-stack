@@ -1,57 +1,58 @@
-import type { Technology } from '../types';
+import type { TechCardProps } from "../types";
 
-interface TechCardProps {
-  tech: Technology;
-  handleAddToStack: (item: Technology) => void;
-  isAdded: boolean;
-}
-
-export default function TechCard({ tech, handleAddToStack, isAdded }: TechCardProps) {
+export default function TechCard({
+  tech,
+  handleAddToStack,
+  isAdded,
+}: TechCardProps) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+    <div className="card bg-white border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
       <div>
-        <div className="flex items-start justify-between gap-2 mb-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2">
-              <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
-            </div>
-            <h3 className="font-bold text-slate-900 text-base">{tech.name}</h3>
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex items-center gap-2.5">
+            <img
+              src={tech.icon}
+              alt={tech.name}
+              className="w-6 h-6 object-contain"
+            />
+            <h3 className="font-bold text-slate-900 text-sm">{tech.name}</h3>
           </div>
           {tech.badge && (
-            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+            <span className="badge badge-ghost badge-sm text-[10px] font-medium">
               {tech.badge}
             </span>
           )}
         </div>
 
-        <p className="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-2">
+        <p className="text-slate-500 text-xs leading-normal mb-4 h-9 overflow-hidden">
           {tech.description}
         </p>
 
-        <div className="flex items-center justify-between text-xs text-slate-500 mb-5">
+        <div className="flex items-center justify-between text-xs text-slate-500 mb-4">
           <div className="flex items-center gap-2">
-            <span className="bg-slate-100 px-2 py-1 rounded text-[11px] font-medium text-slate-600">
+            <span className="badge badge-sm border-none bg-slate-100 text-slate-600 text-[11px]">
               {tech.category}
             </span>
-            <span className="text-[11px] text-slate-400">{tech.difficulty}</span>
+            <span className="text-[11px] text-slate-400">
+              {tech.difficulty}
+            </span>
           </div>
-          <div className="flex items-center gap-1 font-semibold text-slate-700 text-[11px]">
-            <span className="text-amber-400">★</span> {tech.rating}
-          </div>
+          <span className="font-semibold text-slate-700 text-[11px]">
+            ★ {tech.rating}
+          </span>
         </div>
       </div>
 
-      {/* Button state and style conditional handling */}
       <button
         onClick={() => handleAddToStack(tech)}
         disabled={isAdded}
-        className={`w-full py-2.5 px-4 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1 ${
+        className={`btn btn-sm w-full font-medium ${
           isAdded
-            ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200'
-            : 'brand-gradient text-white hover:opacity-95 shadow-sm'
+            ? "btn-disabled bg-slate-100 text-slate-400"
+            : "bg-slate-900 text-white hover:bg-black border-none"
         }`}
       >
-        {isAdded ? '✓ Added to Stack' : 'Add to Stack'}
+        {isAdded ? "✓ Added to Stack" : "Add to Stack"}
       </button>
     </div>
   );
