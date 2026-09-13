@@ -31,25 +31,34 @@ A modern, interactive web application designed to help developers explore, selec
 
 ## React Questions & Answers
 
-### 1. What is JSX, and why is it used in React?
-**Answer:** JSX (JavaScript XML) is a syntax extension for JavaScript that lets developers write HTML-like markup inside a JavaScript file. It is used in React because it makes building component UI structures intuitive, readable, and easy to maintain while combining render logic with component structure.
+## 1. What is JSX, and why is it used in React?
 
-### 2. What is the difference between props and state?
-**Answer:** 
-- **Props (Properties):** Immutable data passed down from a parent component to a child component (read-only for the child).
-- **State:** Internal data managed within a component that can change over time. When state changes, the component automatically re-renders to reflect the new state in the UI.
+**Answer:**JSX is a JavaScript syntax that lets us write HTML-like code inside JavaScript. It makes React code easier to read and helps us describe what the UI should look like directly inside our components.
 
-### 3. What does the `useState` hook do, and where did you use it in this project?
-**Answer:** The `useState` hook allows functional components to create, hold, and update their own local state. In this project, `useState` was used in `App.tsx` to store the loaded technology list (`technologies`), maintain the selected items in the user's stack (`stack`), and manage the loading spinner state (`loading`).
 
-### 4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
-**Answer:** The `useEffect` hook is used to handle side effects in components, such as fetching data, modifying the DOM, or setting up subscriptions. In this project, it was used to fetch the technology items from local `data.json` file asynchronously as soon as the main application component mounted on the screen.
+## 2. What is the difference between props and state?
 
-### 5. Why does every item in a `.map()` list need a unique `key` prop?
-**Answer:** React uses the unique `key` prop to identify which items in a list have changed, been added, or been removed. It optimizes performance during the reconciliation process by preventing unnecessary re-renders of unchanged DOM elements.
+**Answer:**
+- **Props:** Props are data passed from a parent component to a child component. The child component can use the data but should not change it directly.
+- **State:** State is data managed inside a component. It can change when something happens, and React updates the UI when the state changes.
 
-### 6. What is conditional rendering? Give an example from this project.
-**Answer:** Conditional rendering means rendering different components or markup based on specific conditions (e.g., using ternary operators `? :` or logical `&&`). 
+
+## 3. What does the `useState` hook do, and where did you use it in this project?
+
+**Answer:**`useState` is a React hook that lets us store and update data inside a component. In this project, I used it in `App.tsx` to store the technology data, keep track of the technologies added to the stack, and control the loading state.
+
+
+## 4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
+
+**Answer:** `useEffect` is used when we need to perform something after a component renders, such as fetching data. In this project, I used it to fetch the technology data from the local `data.json` file when the `App` component loads.
+
+## 5. Why does every item in a `.map()` list need a unique `key` prop?
+
+**Answer:** A unique `key` helps React identify each item in a list. This allows React to understand which items have changed, been added, or removed when the UI updates.
+
+## 6. What is conditional rendering? Give an example from this project.
+
+**Answer:** Conditional rendering means showing different UI depending on a condition. In this project, I used it to show a loading spinner while the JSON data is being loaded and display the technology cards after the data is ready.
 
 **Example from project (`TechCard.tsx`):**
 ```tsx
