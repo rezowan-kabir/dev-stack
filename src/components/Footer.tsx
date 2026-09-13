@@ -2,7 +2,7 @@ import logoImg from "../assets/logo-text.png";
 
 export default function Footer() {
   return (
-    <footer className="pt-12">
+    <footer className="pt-12 pb-10">
       <div className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-between gap-90">
           <div className="flex-1 text-center lg:text-left space-y-4">
