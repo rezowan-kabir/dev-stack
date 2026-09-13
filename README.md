@@ -1,27 +1,27 @@
-# Dev Stack Builder 🚀
+# Dev Stack Builder 
 
 A modern, interactive web application designed to help developers explore, select, and organize their ideal tech stack for modern software projects.
 
 ---
 
-## 📄 Description
+## Description
 
 **Dev Stack Builder** allows developers to browse curated frontend, backend, database, and devops tools. Users can seamlessly add or remove technologies to/from a custom list, monitor selected technologies in real-time with visual indicators, and clear their selection effortlessly—all powered by a clean, responsive interface.
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
-- **React** (Component-driven UI library)
-- **TypeScript** (Type-safe JavaScript for reliability)
-- **Vite** (Next-generation, fast frontend build tool)
-- **Tailwind CSS & DaisyUI** (Utility-first and component-based styling)
-- **React Toastify** (Interactive notification alerts)
-- **JSON** (Local data source for technology items)
+- **React** 
+- **TypeScript**
+- **Vite** 
+- **Tailwind CSS & DaisyUI** 
+- **React Toastify** 
+- **JSON**
 
 ---
 
-## ✨ Features
+## Features
 
 - **Browse Development Technologies:** Explore an extensive grid of technologies complete with ratings, badges, descriptions, and difficulty levels.
 - **Dynamic Stack Management:** Add or remove technologies dynamically with state synchronization, ensuring no duplicate items can be added.
@@ -29,7 +29,7 @@ A modern, interactive web application designed to help developers explore, selec
 
 ---
 
-## ❓ React Questions & Answers
+## React Questions & Answers
 
 ### 1. What is JSX, and why is it used in React?
 **Answer:** JSX (JavaScript XML) is a syntax extension for JavaScript that lets developers write HTML-like markup inside a JavaScript file. It is used in React because it makes building component UI structures intuitive, readable, and easy to maintain while combining render logic with component structure.
